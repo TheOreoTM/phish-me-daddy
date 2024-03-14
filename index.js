@@ -79,13 +79,11 @@ setInterval(downloadPhishingDomains, 24 * 60 * 60 * 1000);
 
 app.get("/check", (req, res) => {
 	const urlToCheck = req.query.url;
-	console.log(`🚀 ~ app.get ~ urlToCheck: "${urlToCheck}"`);
 	if (!urlToCheck) {
 		res.status(400).send("URL parameter is required");
 		return;
 	}
 	checkPhishingDomain(urlToCheck, (isPhishing) => {
-		console.log("🚀 ~ app.get ~ isPhishing:", isPhishing);
 		res.send({ isPhishing });
 	});
 });
@@ -94,3 +92,4 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
 	console.log(`Server is running on port ${PORT}`);
 });
+downloadPhishingDomains();
